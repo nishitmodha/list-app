@@ -1,56 +1,58 @@
 class ListsController < ApplicationController
-    before_action :set_list, only: [:show, :update, :destroy]
-
-    # GET /lists
-    def index
-      @lists = List.all
-
-      render json: @lists
+  include CurrentUserConcern
+  before_action :set_list, only: [:show, :destroy, :update]
+  
+  def index
+    lists = List.where("user_id = ?", params[:user_id])
+    if lists.length > 0
+      render json: lists
+    else
+      render json: {
+        message: 'No lists found',
+        status: 404,
+        type: 'Error'
+      }
     end
-
-    # GET /lists/1
-    def show
-      render json: @list
-    end
-
-    # POST /lists
-    def create
-      @list = List.new(list_params)
-
-      if @list.save
-        render json: @list, status: :created
-      else
-        render json: @list.errors, status: :unprocessable_entity
-      end
-    end
-
-    # PATCH/PUT /lists/1
-    def update
-      if @list.update(list_params)
-        render json: @list
-      else
-        render json: @list.errors, status: :unprocessable_entity
-      end
-    end
-
-    # DELETE /lists/1
-    def destroy
-      @list.destroy
-      if @list.destroy
-        head :no_content, status: :ok
-      else
-        render json: @list.errors, status: :unprocessable_entity
-      end
-    end
-
-    private
-      # Use callbacks to share common setup or constraints between actions.
-      def set_list
-        @list = List.find(params[:id])
-      end
-
-      # Only allow a list of trusted parameters through.
-      def list_params
-        params.require(:list).permit(:title)
-      end
   end
+
+  def show
+    render json: @list
+  end
+
+  def create
+    @list = List.create(title: params[:title], user_id: params[:user_id])
+    if @list.save
+      render json: @list
+    else
+      render json: {
+        message: "List creation failed",
+        type: "error",
+        status: 422
+      }
+    end
+    
+  end
+
+  def update
+    if @list.update(list_params)
+      render json: @list, status: 200
+    else
+      render json: { error: @list.errors }, status: 422
+    end
+  end
+
+  def destroy
+    @list.destroy
+    head 204
+  end
+
+  private
+
+  def set_list
+    @list = List.find(params[:id])
+  end
+
+  def list_params
+    params.permit(:id, :title, :user_id)
+  end
+end
