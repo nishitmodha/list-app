@@ -1,6 +1,5 @@
 import { useState, useEffect, Fragment } from "react";
 import axios from "axios";
-
 import ListForm from "./ListForm";
 
 const ListItem = (props) => {
@@ -51,7 +50,6 @@ const ListItem = (props) => {
           }
         });
       })
-    console.log("List Deleted");
   }
 
   const updateHandler = (id, title) => {
@@ -69,7 +67,6 @@ const ListItem = (props) => {
       </div>
     )
   );
-
   const handleLogoutClick = () => {
     axios
       .delete("http://localhost:3001/logout", { withCredentials: true })
@@ -88,7 +85,7 @@ const ListItem = (props) => {
         <ListForm id={index} existingTitle={existingTitle} isEdit={edit} user_id={props.user_id} isLoggedIn={props.isLoggedIn} />
       </div>
       <br />
-      {noRecord ? <p>No Lists found!</p> : printLists}
+        {noRecord ? <p>No Lists found!</p> : printLists }
       <div>
         {props.isLoggedIn && props.user_id &&
           <button className="LogoutBtn" onClick={() => handleLogoutClick()}>Logout</button>
