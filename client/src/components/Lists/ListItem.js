@@ -5,31 +5,19 @@ import ListForm from "./ListForm";
 
 const ListItem = (props) => {
   const [lists, setLists] = useState([]);
-
-
-  // For updating a list
   const [edit, setEdit] = useState(false);
   const [index, setIndex] = useState(0);
   const [existingTitle, setExistingTitle] = useState('');
-
-
-  // For error handling
   const [noRecord, setNoRecord] = useState(false);
 
-
-  // Fetching Lists from Backend
   useEffect(() => {
     axios.get(`http://localhost:3001/users/${props.user_id}/lists`)
       .then(res => {
-        // console.log("Data from GET: ", res);
-
-        // If no lists found
         if (!res.data) {
           setNoRecord(true);
         }
         else {
           const data = Array.from(res.data);
-          // console.log("Json parse: ", data);
           const transformedData = data.map((listData) => {
             return {
               id: listData.id,
@@ -41,7 +29,6 @@ const ListItem = (props) => {
         }
       })
   }, [props.user_id]);
-
 
   const deleteHandler = (id, i) => {
     axios.delete(`http://localhost:3001/users/${props.user_id}/lists/${id}`)
@@ -67,13 +54,11 @@ const ListItem = (props) => {
     console.log("List Deleted");
   }
 
-
   const updateHandler = (id, title) => {
     setEdit(true);
     setIndex(+id);
     setExistingTitle(title);
   }
-
 
   let printLists = (
     lists.map((list, i) =>
@@ -102,9 +87,7 @@ const ListItem = (props) => {
       <div>
         <ListForm id={index} existingTitle={existingTitle} isEdit={edit} user_id={props.user_id} isLoggedIn={props.isLoggedIn} />
       </div>
-
       <br />
-
       {noRecord ? <p>No Lists found!</p> : printLists}
       <div>
         {props.isLoggedIn && props.user_id &&

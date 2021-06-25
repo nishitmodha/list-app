@@ -1,12 +1,9 @@
 import React, { Component } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import axios from "axios";
-
 import "./App.css";
 import Home from "./components/Home";
-// import Dashboard from "./components/Dashboard";
 import ListItem from './components/Lists/ListItem'
-// import Unauthorized from "./components/Unauthorized";
 
 export default class App extends Component {
   constructor() {
@@ -17,7 +14,6 @@ export default class App extends Component {
       user: {},
       isLoggedIn: false
     };
-
     this.handleLogin = this.handleLogin.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
   }
