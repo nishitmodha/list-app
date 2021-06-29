@@ -40,6 +40,9 @@ export default class Login extends Component {
         if (response.data.logged_in) {
           this.props.handleSuccessfulAuth(response.data);
         }
+        else{
+        alert("User does not exist, You need to Sign up first.");
+        }
       })
       .catch(error => {
         console.log("login error", error);
