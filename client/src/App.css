@@ -1,0 +1,95 @@
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.Login
+{
+  float: left;
+  width: 50%;
+}
+
+.Registration
+{
+  float: right;
+  width: 50%;
+}
+
+.LoginInfo {
+  width: 80%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.Login button
+{
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 70%;
+}
+
+.Registration button
+{
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 70%;
+}
+
+.ListForm .ListInput
+{
+  padding: 7px;
+  margin: 7px 0;
+  box-sizing: border-box;
+}
+
+
+.ListButton
+{
+  background-color: #04AA6D;
+  color: white;
+  padding: 7px 20px;
+  margin: 8px 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.ListButtonDel
+{
+  background-color: rgb(236, 65, 65);
+  color: white;
+  padding: 7px 20px;
+  margin: 8px 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.LogoutBtn
+{
+  background-color: red;
+  color: white;
+  padding: 7px 20px;
+  margin: 8px 5px;
+  border: none;
+  cursor: pointer;
+}
